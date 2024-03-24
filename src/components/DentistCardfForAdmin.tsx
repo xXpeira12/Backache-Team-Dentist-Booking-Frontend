@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function DentistCardForAdmin({ dentName, yearExp, clinic }: { dentName: string; yearExp: number; clinic: string }) {
 
     return (
@@ -11,8 +13,13 @@ export default function DentistCardForAdmin({ dentName, yearExp, clinic }: { den
         <div>
           <strong className="font-bold">Clinic:</strong> {clinic}
         </div>
-        <button className="bg-yellow-200">Edit</button>
+        <Link href={""}>
+          <button className="bg-yellow-200">Edit</button>
+        </Link>
+        
+        <Link href={""}>
         <button className="ml-2 bg-red-400">Delete</button>
+        </Link>
       </div>
     );
   }
