@@ -23,7 +23,7 @@ export default async function TopMenu() {
             <TopMenuItem title='Reservations' pageRef='/reservations'/>
             <TopMenuItem title='About' pageRef='/about'/>
             <TopMenuItem title='Dentists' pageRef='/dentist'/>
-            <TopMenuItem title='Dashboard' pageRef='/dashboard'/>
+            <TopMenuItem title='Dashboard' pageRef={`/dashboard/${session?.user._id}`}/>
             <TopMenuItem title='Cart' pageRef='/cart'/>
             <TopMenuItem title='Register' pageRef='/register'/>
             {/* <div className='absolute right-0 h-full flex flex-row'> */}
