@@ -2,6 +2,9 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import getBookings from "@/libs/getBookings"
 import getUserProfile from "@/libs/getUserProfile";
 import { getServerSession } from "next-auth";
+import Link from "next/link";
+import { dbConnect } from "@/db/dbConnect";
+import Booking from "@/db/models/Booking";
 
 export default async function dashBoardPage( {params} : {params:{uid:string}} ) {
 
@@ -20,6 +23,16 @@ export default async function dashBoardPage( {params} : {params:{uid:string}} ) 
 
     const profile = await getUserProfile(session.user.token);
 
+    const deleteBooking = async (deleteForm: FormData) => {
+        'use server'
+        try {
+            await dbConnect();
+            const booking = await Booking.deleteOne({_id: deleteForm.get("bid")})
+        } catch(error) {
+            console.log(error);
+        }
+    };
+
     return(
         <main>
             <div>Your Bookings</div>
@@ -34,8 +47,13 @@ export default async function dashBoardPage( {params} : {params:{uid:string}} ) 
                             <div>Booking ID : {bookItem._id}</div>
                             <div>Booking Date : {bookItem.bookDate}</div>
                             <div>Dentist : {bookItem.dentist.name}</div>
-                            <button className="bg-blue-300">Edit</button>
-                            <button className="bg-blue-300 ml-2">Delete</button>
+                            <Link href={`/dashboard/editbooking/${bookItem._id}?bookDate=${encodeURIComponent(bookItem.bookDate)}`}>
+                                <button className="bg-blue-300">Edit</button>
+                            </Link>
+                            <form action={deleteBooking}>
+                                <input type="text" hidden required id="bid" name="bid" value={bookItem._id}/>
+                                <button type="submit" className="bg-blue-300 ml-2">Delete</button>
+                            </form>
                         </div>
                     ))
                 )
@@ -53,8 +71,13 @@ export default async function dashBoardPage( {params} : {params:{uid:string}} ) 
                             <div>Booking Date : {bookItem.bookDate}</div>
                             <div>User ID : {bookItem.user}</div>
                             <div>Dentist : {bookItem.dentist.name}</div>
-                            <button className="bg-blue-300">Edit</button>
-                            <button className="bg-blue-300 ml-2">Delete</button>
+                            <Link href={`/dashboard/editbooking/${bookItem._id}?bookDate=${encodeURIComponent(bookItem.bookDate)}`}>
+                                <button className="bg-blue-300">Edit</button>
+                            </Link>
+                            <form action={deleteBooking}>
+                                <input type="text" hidden required id="bid" name="bid" value={bookItem._id}/>
+                                <button type="submit" className="bg-blue-300 ml-2">Delete</button>
+                            </form>
                         </div>
                         ))
                     }
