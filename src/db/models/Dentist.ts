@@ -24,7 +24,7 @@ const DentistSchema = new mongoose.Schema(
       },
     },
 );
-  
+
 //Cascade delete bookings when a dentist is deleted
 DentistSchema.pre(
     "deleteOne",
@@ -35,7 +35,7 @@ DentistSchema.pre(
       next();
     }
 );
-  
+
 //Reverse populate with virtuals
 DentistSchema.virtual("bookings", {
     ref: "Booking",
@@ -43,6 +43,6 @@ DentistSchema.virtual("bookings", {
     foreignField: "dentist",
     justOne: false,
 });
-  
+
 const Dentist = mongoose.models.Dentist || mongoose.model("Dentist", DentistSchema);
 export default Dentist; 
