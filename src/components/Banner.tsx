@@ -45,7 +45,7 @@ export default function Banner() {
             font-semibold py-2 px-2 m-2 rounded z-30 absolute bottom-0 right-0
             hover:bg-cyan-600 hover:text-white hover:border-transparent"
         onClick={(e) => {
-          router.push(`/booking/choosedate/?token=${token}`);
+          router.push(`/booking/choosedate/?token=${token}&userId=${session?.user._id}`);
           e.stopPropagation();
         }}
       >
