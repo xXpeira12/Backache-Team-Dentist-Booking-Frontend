@@ -19,7 +19,7 @@ const token = urlParams.get("token");
 
     return (
         <div className="w-full h-[40%] text-center items-center justify-center flex flex-col my-4 py-4 space-y-2">
-            <h1>Choose Date {bookDate}</h1>
+            <h1>Choose Date</h1>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker
                     views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
