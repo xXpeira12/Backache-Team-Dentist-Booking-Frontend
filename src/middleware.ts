@@ -2,6 +2,7 @@ export { default } from 'next-auth/middleware'
 
 export const config = {
     matcher: [
-        "/reservations/manage"
+        '/booking/choosedate',
+        '/dashboard/undefined'
     ]
 }

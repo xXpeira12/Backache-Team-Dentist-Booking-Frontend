@@ -12,11 +12,7 @@ export default async function dashBoardPage( {params} : {params:{uid:string}} ) 
     const token = (session?.user.token)?.toString();
 
     if(!session || !session.user.token) {
-        return(
-            <div>
-                Please Sign-In
-            </div>
-        )
+        return null;
     }
 
     const bookings = await getBookings(session.user.token);
