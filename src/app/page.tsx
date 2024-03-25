@@ -8,10 +8,10 @@ import TravelCard from "@/components/TravelCard";
 export default function Home() {
   return (
     <main>
-      <div>
+      <div className="bg-blue-100" >
         <Banner/>
         {/* <TravelCard/> */}
       </div>
     </main>
-  );
+  );  
 }
