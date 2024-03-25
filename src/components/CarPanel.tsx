@@ -2,7 +2,7 @@
 import { useReducer, useRef, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import Link from "next/link";
-import getCars from "@/libs/getCars";
+import getCars from "@/libs/getDentists";
 
 export default function CarPanel() {
 

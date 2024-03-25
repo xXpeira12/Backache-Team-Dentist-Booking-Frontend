@@ -1,6 +1,6 @@
 import CarCatalog from "@/components/CarCatalog";
 import CarPanel from "@/components/CarPanel";
-import getCars from "@/libs/getCars";
+import getCars from "@/libs/getDentists";
 import { LinearProgress } from "@mui/material";
 import { Suspense } from "react";
 

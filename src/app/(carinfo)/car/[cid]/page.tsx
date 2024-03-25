@@ -1,4 +1,4 @@
-import getCar from "@/libs/getCar";
+import getCar from "@/libs/getDentist";
 import Image from "next/image";
 import Link from "next/link";
 
