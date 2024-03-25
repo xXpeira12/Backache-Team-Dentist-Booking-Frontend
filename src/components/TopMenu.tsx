@@ -23,16 +23,16 @@ export default async function TopMenu() {
             <TopMenuItem title='Reservations' pageRef='/reservations'/>
             <TopMenuItem title='About' pageRef='/about'/>
             <TopMenuItem title='Dentists' pageRef='/dentist'/>
-            <TopMenuItem title='Dashboard' pageRef='/dashboard'/>
+            <TopMenuItem title='Dashboard' pageRef={`/dashboard/${session?.user._id}`}/>
             <TopMenuItem title='Cart' pageRef='/cart'/>
             <TopMenuItem title='Booking' pageRef={`/booking/choosedate/?token=${session?.user.token}&uid=${session?.user._id}`}/>
             <TopMenuItem title='Register' pageRef='/register'/>
             {/* <div className='absolute right-0 h-full flex flex-row'> */}
             {
-                session ? <Link href="/api/auth/signout">
+                session ? <Link href="../api/auth/signout">
                     <div className='flex items-center h-full px-2 text-cyan-600 text-sm right-0'>
                     Sign-Out of {session.user?.name}</div></Link> :
-                <Link href="api/auth/signin"><div className='flex items-center h-full px-2 text-cyan-600 text-sm right-0'>
+                <Link href="../api/auth/signin"><div className='flex items-center h-full px-2 text-cyan-600 text-sm right-0'>
                     Sign-In</div></Link>
             }
             {/* </div> */}
