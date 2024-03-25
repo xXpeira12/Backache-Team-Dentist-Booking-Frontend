@@ -8,7 +8,7 @@ import Link from "next/link";
 export default async function DentistCardForAdmin({ dentName, yearExp, clinic, did }: { dentName: string; yearExp: number; clinic: string, did: string }) {
 
     return (
-      <div className="bg-white shadow-md rounded-lg p-4 mb-4">
+      <div>
         <div className='mb-2'>
           <strong className="font-bold">Name:</strong> {dentName}
         </div>
@@ -18,9 +18,9 @@ export default async function DentistCardForAdmin({ dentName, yearExp, clinic, d
         <div>
           <strong className="font-bold">Clinic:</strong> {clinic}
         </div>
-        <Link href={`/dentist/editdentist/${did}`}>
+        {/* <Link href={`/dentist/editdentist/${did}`}>
           <button className="bg-yellow-200">Edit</button>
-        </Link>
+        </Link> */}
         
       </div>
     );
