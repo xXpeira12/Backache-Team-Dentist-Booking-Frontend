@@ -15,7 +15,7 @@ export default function ChooseDatePage() {
 const [bookDate, setBookDate] = useState<Dayjs|null>(null);
 const urlParams = useSearchParams();
 const token = urlParams.get("token");
-const userId = urlParams.get("userId");
+const userId = urlParams.get("uid");
 
     return (
         <div className="w-full h-[40%] text-center items-center justify-center flex flex-col my-4 py-4 space-y-2">
