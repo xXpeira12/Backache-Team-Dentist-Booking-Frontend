@@ -35,52 +35,62 @@ export default async function dashBoardPage( {params} : {params:{uid:string}} ) 
 
     return(
         <main>
-            <div>Your Bookings</div>
+            <div className="text-center text-lg font-bold m-4">Your Bookings</div>
             {
                 (filteredBookings.length == 0) ?    -
-                <div>
+                <div className="text-center text-md font-semibold m-4">
                     You don't have any booking
                 </div> :
                 (
+                    <div className="flex flex-col space-y-5 m-4 p-4 items-center justify-center">
+                        {
                     filteredBookings.map((bookItem: Object) => (
-                        <div key={bookItem._id}>
+                        <div key={bookItem._id} className="bg-sky-200 p-6 border border-sky-600 rounded-md">
                             <div>Booking ID : {bookItem._id}</div>
                             <div>Booking Date : {bookItem.bookDate}</div>
                             <div>Dentist : {bookItem.dentist.name}</div>
+                            <div className="flex flex-row space-x-2 mx-2 px-2 justify-end">
                             <Link href={`/dashboard/editbooking/${bookItem._id}?bookDate=${encodeURIComponent(bookItem.bookDate)}`}>
-                                <button className="bg-blue-300">Edit</button>
+                                <button className="bg-orange-200 border border-orange-600 hover:bg-yellow-400 hover:border-transparent rounded-lg px-2 py-1 text-sm">Edit</button>
                             </Link>
                             <form action={deleteBooking}>
                                 <input type="text" hidden required id="bid" name="bid" value={bookItem._id}/>
-                                <button type="submit" className="bg-blue-300 ml-2">Delete</button>
+                                <button type="submit" className="bg-red-300 border border-red-600 hover:bg-red-600 hover:border-transparent rounded-lg px-2 py-1 text-sm">Delete</button>
                             </form>
+                            </div>
                         </div>
                     ))
+                    }
+                    </div>
                 )
 
             }
             {
                 (profile.data.role == "admin") ?
                 <div>
-                    <hr/>
-                    All Bookings
+                    <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+                    <div className="text-center text-lg font-bold m-4">All Bookings</div>
+                    <div className="flex flex-col space-y-5 m-4 p-4 items-center justify-center">
                     {
                         bookings.data.map((bookItem: Object) => (
-                            <div key={bookItem._id}>
+                            <div key={bookItem._id} className="bg-sky-200 p-6 border border-sky-600 rounded-md">
                             <div>Booking ID : {bookItem._id}</div>
                             <div>Booking Date : {bookItem.bookDate}</div>
                             <div>User ID : {bookItem.user}</div>
                             <div>Dentist : {bookItem.dentist.name}</div>
+                            <div className="flex flex-row space-x-2 mx-2 px-2 justify-end">
                             <Link href={`/dashboard/editbooking/${bookItem._id}?bookDate=${encodeURIComponent(bookItem.bookDate)}`}>
-                                <button className="bg-blue-300">Edit</button>
+                                <button className="bg-orange-200 border border-orange-600 hover:bg-yellow-400 hover:border-transparent rounded-lg px-2 py-1 text-sm">Edit</button>
                             </Link>
                             <form action={deleteBooking}>
                                 <input type="text" hidden required id="bid" name="bid" value={bookItem._id}/>
-                                <button type="submit" className="bg-blue-300 ml-2">Delete</button>
+                                <button type="submit" className="bg-red-300 border border-red-600 hover:bg-red-600 hover:border-transparent rounded-lg px-2 py-1 text-sm">Delete</button>
                             </form>
+                            </div>
                         </div>
                         ))
                     }
+                    </div>
                 </div> :
                 null
             }
