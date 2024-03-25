@@ -15,7 +15,7 @@ export default function ChooseDatePage() {
 const [bookDate, setBookDate] = useState<Dayjs|null>(null);
 const urlParams = useSearchParams();
 const token = urlParams.get("token");
-// console.log(token);
+const userId = urlParams.get("userId");
 
     return (
         <div className="w-full h-[40%] text-center items-center justify-center flex flex-col my-4 py-4 space-y-2">
@@ -29,7 +29,7 @@ const token = urlParams.get("token");
                     onChange={(value) => {setBookDate(value)}}
                 />
             </LocalizationProvider>
-            <Link href={`/booking/choosedentist/?token=${token}&bookDate=${bookDate}`} >
+            <Link href={`/booking/choosedentist/?token=${token}&userId=${userId}&bookDate=${bookDate}`} >
             <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500">next</button>
             </Link>
         </div>
