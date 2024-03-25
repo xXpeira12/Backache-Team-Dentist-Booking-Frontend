@@ -122,8 +122,9 @@ export default function ChooseDentistPage() {
                   onClick={(event) => {
                     handleBooking(event, dentist._id);
                     router.push(`/dashboard/${userId}`);
-                  }}
-                >Select</button>
+                  }}>
+                  Select
+                </button>
             </div>
           ))}
         </div>
