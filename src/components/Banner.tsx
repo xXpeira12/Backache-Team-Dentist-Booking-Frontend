@@ -12,7 +12,8 @@ export default function Banner() {
 
   const { data: session } = useSession();
   // console.log(session);
-  // console.log(session?.user.name);
+  // console.log(session?.user.token);
+  const token = session?.user.token;
 
   return (
     <div
@@ -44,7 +45,7 @@ export default function Banner() {
             font-semibold py-2 px-2 m-2 rounded z-30 absolute bottom-0 right-0
             hover:bg-cyan-600 hover:text-white hover:border-transparent"
         onClick={(e) => {
-          router.push("/booking/choosedate");
+          router.push(`/booking/choosedate/?token=${token}`);
           e.stopPropagation();
         }}
       >

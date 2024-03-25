@@ -7,15 +7,19 @@ import { LocalizationProvider } from "@mui/x-date-pickers"
 import { Dayjs } from "dayjs"
 import { useState } from "react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 
 
 export default function ChooseDatePage() {
 
 const [bookDate, setBookDate] = useState<Dayjs|null>(null);
+const urlParams = useSearchParams();
+const token = urlParams.get("token");
+// console.log(token);
 
     return (
         <div className="w-full h-[40%] text-center items-center justify-center flex flex-col my-4 py-4 space-y-2">
-            <h1>Choose Date</h1>
+            <h1>Choose Date {bookDate}</h1>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker
                     views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
@@ -25,7 +29,7 @@ const [bookDate, setBookDate] = useState<Dayjs|null>(null);
                     onChange={(value) => {setBookDate(value)}}
                 />
             </LocalizationProvider>
-            <Link href={`/booking/choosedentist/?bookDate=${encodeURIComponent(bookDate)}`} >
+            <Link href={`/booking/choosedentist/?token=${token}&bookDate=${bookDate}`} >
             <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500">next</button>
             </Link>
         </div>

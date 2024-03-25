@@ -60,6 +60,12 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import dayjs ,{ Dayjs } from "dayjs";
 import Link from "next/link";
+import createBooking from "@/libs/createBooking";
+import Booking from "@/db/models/Booking";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { set } from "mongoose";
+import getUserProfile from "@/libs/getUserProfile";
 
 interface Dentist {
   _id: string,
@@ -70,11 +76,41 @@ interface Dentist {
   bookings: any[],
 }
 
+interface profile {
+  _id: string,
+  name: string,
+  email: string,
+  tel: string,
+  role: string,
+  createdAt: string,
+}
+
+
 export default function ChooseDentistPage() {
+  // const session = getServerSession(authOptions);
   const [dentists, setDentists] = useState<Dentist[]>([]);
   const [remaindentist, setRemaindentist] = useState<Set<Dentist>>(new Set());
   const searchParams = useSearchParams();
   const bookDate = searchParams.get("bookDate");
+  const token = searchParams.get("token");
+  const [profile, setProfile] = useState(null);
+  
+  console.log("--------------------")
+  console.log(token)
+  console.log(profile)
+  
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try{
+        const response = await getUserProfile(token);
+        const data = await response.json();
+        setProfile(data.data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+    fetchProfile();
+  }, [])
 
   useEffect(() => {
     const fetchDentists = async () => {
@@ -86,13 +122,13 @@ export default function ChooseDentistPage() {
         console.error("Error fetching dentists:", error);
       }
     };
-
+    
     fetchDentists();
   }, []);
-
+  
   useEffect(() => {
     const filteredDentists = new Set<Dentist>();
-
+    
     dentists.map((dentist: Dentist) => {
       if (dentist.bookings.length === 0) {
         filteredDentists.add(dentist);
@@ -104,11 +140,19 @@ export default function ChooseDentistPage() {
         });
       }
     });
-
+    
     setRemaindentist(filteredDentists);
   }, [dentists]);
 
 
+
+  
+  // async function createBooking(userId: string, dentistId: string, bookDate: Date) {
+  //   'use server'
+  //   const booking = new Booking({userId, dentistId, bookDate });
+  //   await booking.save();
+  // }
+  
   return (
     <>
       <h1 className="text-center m-2 text-xl font-semibold">Choose Dentist</h1>
@@ -121,8 +165,12 @@ export default function ChooseDentistPage() {
               <h1>Experience: {dentist.year_exp} Years</h1>
               <h1>Clinic: {dentist.clinic}</h1>
               <h1>CreatedAt: {dentist.createdAt} </h1>
-              <Link href={`/booking/dashboard/?dentist=${dentist._id}&bookDate=${bookDate}`}>
-                <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500">Select</button>
+              <Link href={"/booking/dashboard"}
+              // href={`/booking/dashboard/?dentist=${dentist._id}&bookDate=${bookDate}`}
+              >
+                <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500" 
+                  onClick={() => createBooking(profile._id, dentist._id, dayjs(bookDate).toDate())}
+                >Select</button>
                 </Link>
             </div>
           ))}
