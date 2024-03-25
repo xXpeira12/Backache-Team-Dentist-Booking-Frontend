@@ -22,7 +22,7 @@ export default async function DentistPage() {
                 <div>
                     {
                         dentist.data.map((dentistItem:Object) => (
-                            <DentistCardForAdmin dentName = {dentistItem.name} yearExp={dentistItem.year_exp} clinic={dentistItem.clinic} /> 
+                            <DentistCardForAdmin dentName = {dentistItem.name} yearExp={dentistItem.year_exp} clinic={dentistItem.clinic} did={dentistItem._id}/> 
                         ))
                     }   
                     <Link href={"/dentist/createdentist"}>
