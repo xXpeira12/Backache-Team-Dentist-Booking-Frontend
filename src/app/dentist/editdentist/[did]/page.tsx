@@ -6,20 +6,23 @@ import { dbConnect } from "@/db/dbConnect";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
-export default async function editDentistPage() {
+export default async function editDentistPage({params} : {params:{did:string}}) {
 
-    const editdentist = async (createDentistForm: FormData) => {
+    const editdentist = async (editDentistForm: FormData) => {
         'use server'
-        const name = createDentistForm.get("name");
-        const year_exp = createDentistForm.get("year_exp");
-        const clinic = createDentistForm.get("clinic");
+        const name = editDentistForm.get("name");
+        const year_exp = editDentistForm.get("year_exp");
+        const clinic = editDentistForm.get("clinic");
 
         try {
             await dbConnect();
-            const dentist = await Dentist.create({
+            const dentist = await Dentist.findByIdAndUpdate(params.did, {
                 "name": name,
                 "year_exp": year_exp,
                 "clinic": clinic
+            }, {
+                new: true,
+                ranValidators: true,
             })
         } catch(error) {
             console.log(error);
@@ -45,8 +48,8 @@ export default async function editDentistPage() {
             You are not Admin
         </div> :
         <div>
-            Create Dentists
-            <form action={createDentist}>
+            Edit Dentists
+            <form action={editdentist}>
                 <div>
                     <label htmlFor="name">Dentist Name</label>
                     <input type="text" required id="name" name="name" placeholder="Name"/>
@@ -60,11 +63,9 @@ export default async function editDentistPage() {
                     <input type="text" required id="clinic" name="clinic" placeholder="Clinic"/>
                 </div>
                 <button type="submit">
-                    Create new Dentist
+                    Done
                 </button>
             </form>
         </div>
     )
 }
-}
-
