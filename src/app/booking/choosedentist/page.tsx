@@ -121,7 +121,7 @@ export default function ChooseDentistPage() {
                 <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500" 
                   onClick={(event) => {
                     handleBooking(event, dentist._id);
-                    router.push("/dashboard");
+                    router.push(`/dashboard/${userId}`);
                   }}
                 >Select</button>
             </div>
