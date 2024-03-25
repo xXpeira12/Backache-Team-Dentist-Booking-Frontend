@@ -9,6 +9,7 @@ import Booking from "@/db/models/Booking";
 export default async function dashBoardPage( {params} : {params:{uid:string}} ) {
 
     const session = await getServerSession(authOptions);
+    const token = (session?.user.token)?.toString();
 
     if(!session || !session.user.token) {
         return(
@@ -50,7 +51,7 @@ export default async function dashBoardPage( {params} : {params:{uid:string}} ) 
                             <div>Booking Date : {bookItem.bookDate}</div>
                             <div>Dentist : {bookItem.dentist.name}</div>
                             <div className="flex flex-row space-x-2 mx-2 px-2 justify-end">
-                            <Link href={`/dashboard/editbooking/${bookItem._id}?bookDate=${encodeURIComponent(bookItem.bookDate)}`}>
+                            <Link href={`/dashboard/editbooking/choosedate/${bookItem._id}?token=${token}&bookDate=${encodeURIComponent(bookItem.bookDate)}`}>
                                 <button className="bg-orange-200 border border-orange-600 hover:bg-yellow-400 hover:border-transparent rounded-lg px-2 py-1 text-sm">Edit</button>
                             </Link>
                             <form action={deleteBooking}>
@@ -79,7 +80,7 @@ export default async function dashBoardPage( {params} : {params:{uid:string}} ) 
                             <div>User ID : {bookItem.user}</div>
                             <div>Dentist : {bookItem.dentist.name}</div>
                             <div className="flex flex-row space-x-2 mx-2 px-2 justify-end">
-                            <Link href={`/dashboard/editbooking/${bookItem._id}?bookDate=${encodeURIComponent(bookItem.bookDate)}`}>
+                            <Link href={`/dashboard/editbooking/choosedate/${bookItem._id}?token=${token}bookDate=${encodeURIComponent(bookItem.bookDate)}`}>
                                 <button className="bg-orange-200 border border-orange-600 hover:bg-yellow-400 hover:border-transparent rounded-lg px-2 py-1 text-sm">Edit</button>
                             </Link>
                             <form action={deleteBooking}>
