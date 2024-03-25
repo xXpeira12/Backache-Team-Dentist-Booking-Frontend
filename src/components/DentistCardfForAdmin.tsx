@@ -17,9 +17,11 @@ export default function DentistCardForAdmin({ dentName, yearExp, clinic }: { den
           <button className="bg-yellow-200">Edit</button>
         </Link>
         
-        <Link href={""}>
-        <button className="ml-2 bg-red-400">Delete</button>
-        </Link>
+        <form action = {deleteBooking} >
+          <input type="text" hidden required id="did" name="did" value={dentItem._id}/>
+          <button className="ml-2 bg-red-400">Delete</button>
+        </form>
+        
       </div>
     );
   }
