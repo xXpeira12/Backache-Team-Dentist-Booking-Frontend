@@ -37,7 +37,7 @@ export default async function dashBoardPage( {params} : {params:{uid:string}} ) 
         <main>
             <div>Your Bookings</div>
             {
-                (filteredBookings.length == 0) ?
+                (filteredBookings.length == 0) ?    -
                 <div>
                     You don't have any booking
                 </div> :
