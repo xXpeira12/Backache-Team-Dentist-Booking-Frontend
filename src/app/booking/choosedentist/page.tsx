@@ -71,10 +71,11 @@ export default function ChooseDentistPage() {
         filteredDentists.add(dentist);
       } else {
         console.log("Check Dentist have already booked?")
-        dentist.bookings.filter((booking: any) => {
+        dentist.bookings.forEach((booking: any) => {
           console.log(booking.bookDate);
+          console.log((booking.bookDate).substring(0,19));
           console.log(bookDate);
-          if (dayjs(new Date(booking.bookDate).toLocaleString()).format("YYYY-MM-DDTHH:00:00") === bookDate) {
+          if ((booking.bookDate).substring(0,19) == bookDate) {
             isOut = true;
           }
         }

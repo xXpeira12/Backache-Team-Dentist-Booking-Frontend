@@ -66,15 +66,21 @@ export default function ChooseDentistPage() {
   
   useEffect(() => {
     const filteredDentists = new Set<Dentist>();
+    console.log("check : " + dentists);
     
     dentists.map((dentist: Dentist) => {
+      console.log(dentist)
       let isOut = false;
       if (dentist.bookings.length === 0) {
+        console.log("Dentist not have Booking")
         filteredDentists.add(dentist);
       } else {
-        
-        dentist.bookings.filter((booking: any) => {
-          if (dayjs(new Date(booking.bookDate).toLocaleString()).format("YYYY-MM-DDTHH:00:00") === bookDate) {
+        console.log("Check Dentist have already booked?")
+        dentist.bookings.forEach((booking: any) => {
+          console.log(booking.bookDate);
+          console.log((booking.bookDate).substring(0,19));
+          console.log(bookDate);
+          if ((booking.bookDate).substring(0,19) == bookDate) {
             isOut = true;
           }
         }
