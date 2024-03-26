@@ -1,5 +1,5 @@
 export default async function deleteDentist(token: string, did: string) {
-    const response = await fetch(`http://localhost:5000/api/v1/dentists/${did}`, {
+    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/dentists/${did}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
