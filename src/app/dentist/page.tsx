@@ -73,23 +73,16 @@ export default async function DentistPage() {
           </Link>
         </div>
       ) : (
-        <div
-          style={{
-            margin: "20px",
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-around",
-            alignContent: "space-around",
-          }}
-        >
-          {dentists.data.map((dentistItem: DentistItem) => (
-            <DentistCard
-              dentName={dentistItem.name}
-              yearExp={dentistItem.year_exp}
-              clinic={dentistItem.clinic}
-            />
-          ))}
+        <div className="flex flex-col space-y-5 m-4 p-4 items-center justify-center">
+            {dentists.data.map((dentistItem: DentistItem) => (
+              <div className="bg-sky-200 p-4 border border-sky-600 rounded-md">
+                <DentistCard
+                  dentName={dentistItem.name}
+                  yearExp={dentistItem.year_exp}
+                  clinic={dentistItem.clinic}
+                  />
+              </div>
+            ))}
         </div>
       )}
     </main>

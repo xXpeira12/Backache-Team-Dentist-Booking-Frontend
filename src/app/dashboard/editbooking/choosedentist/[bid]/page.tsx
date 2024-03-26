@@ -81,6 +81,8 @@ export default function ChooseDentistPage() {
         );
         if (isOut) {
           filteredDentists.delete(dentist);
+        } else {
+          filteredDentists.add(dentist);
         }
         isOut = false;
       }

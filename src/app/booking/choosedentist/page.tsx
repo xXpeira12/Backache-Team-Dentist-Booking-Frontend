@@ -61,14 +61,19 @@ export default function ChooseDentistPage() {
   
   useEffect(() => {
     const filteredDentists = new Set<Dentist>();
+    console.log("check : " + dentists);
     
     dentists.map((dentist: Dentist) => {
+      console.log(dentist)
       let isOut = false;
       if (dentist.bookings.length === 0) {
+        console.log("Dentist not have Booking")
         filteredDentists.add(dentist);
       } else {
-        
+        console.log("Check Dentist have already booked?")
         dentist.bookings.filter((booking: any) => {
+          console.log(booking.booDate);
+          console.log(bookDate);
           if (booking.bookDate === bookDate) {
             isOut = true;
           }
@@ -76,6 +81,8 @@ export default function ChooseDentistPage() {
         );
         if (isOut) {
           filteredDentists.delete(dentist);
+        } else {
+          filteredDentists.add(dentist);
         }
         isOut = false;
       }
