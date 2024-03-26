@@ -68,19 +68,26 @@ export default function ChooseDentistPage() {
     const filteredDentists = new Set<Dentist>();
     
     dentists.map((dentist: Dentist) => {
+      let isOut = false;
       if (dentist.bookings.length === 0) {
         filteredDentists.add(dentist);
       } else {
+        
         dentist.bookings.filter((booking: any) => {
-          if (booking.bookDate !== bookDate) {
-            filteredDentists.add(dentist);
+          if (booking.bookDate === bookDate) {
+            isOut = true;
           }
-        });
+        }
+        );
+        if (isOut) {
+          filteredDentists.delete(dentist);
+        }
+        isOut = false;
       }
     });
     
     setRemaindentist(filteredDentists);
-  }, [dentists]);
+  }, [dentists]); 
   
   
   

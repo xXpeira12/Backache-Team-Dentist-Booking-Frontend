@@ -4,7 +4,7 @@ import { TimePicker } from "@mui/x-date-pickers"
 import { DateTimePicker } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { LocalizationProvider } from "@mui/x-date-pickers"
-import { Dayjs } from "dayjs"
+import dayjs,{ Dayjs } from "dayjs"
 import { useState } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
@@ -26,7 +26,7 @@ const [bookDate, setBookDate] = useState<Dayjs|null>(null);
                     onChange={(value) => {setBookDate(value)}}
                 />
             </LocalizationProvider>
-            <Link href={`/booking/choosedentist/?bookDate=${bookDate}`} >
+            <Link href={`/booking/choosedentist/?bookDate=${dayjs(bookDate).format("YYYY-MM-DDTHH:00:00")}`} >
             <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500">next</button>
             </Link>
         </div>

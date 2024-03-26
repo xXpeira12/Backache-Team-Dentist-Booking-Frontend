@@ -38,7 +38,7 @@ export default function editBookingPage({
           />
         </LocalizationProvider>
         <Link
-          href={`/dashboard/editbooking/choosedentist/${bookingId}?bid=${bookingId}&bookDate=${newBookDate}`}
+          href={`/dashboard/editbooking/choosedentist/${bookingId}?bid=${bookingId}&bookDate=${dayjs(newBookDate).format("YYYY-MM-DDTHH:00:00")}`}
         >
           <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500">
             next
