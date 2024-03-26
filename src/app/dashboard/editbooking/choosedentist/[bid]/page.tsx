@@ -123,7 +123,7 @@ export default function ChooseDentistPage() {
       } else {
         // Handle error response from the server
         console.error("Failed to create booking:", response.statusText);
-        alert("Failed create booking, Please try again");
+        // alert("Failed create booking, Please try again");
       }
     } catch (error) {
       console.error("Error creating booking:", error);
