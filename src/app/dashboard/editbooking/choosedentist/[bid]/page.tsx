@@ -98,7 +98,7 @@ export default function ChooseDentistPage() {
   const handleBooking = async (dentistId: string) => {
     
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/bookings/${bookingId}`, {
+      const response = await fetch(`${process.env.BACKEND_URL}/api/v1/bookings/${bookingId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
