@@ -74,7 +74,7 @@ export default function ChooseDentistPage() {
       } else {
         
         dentist.bookings.filter((booking: any) => {
-          if (dayjs(booking.bookDate).format("YYYY-MM-DDTHH:00:00") === bookDate) {
+          if (dayjs(new Date(booking.bookDate).toLocaleString()).format("YYYY-MM-DDTHH:00:00") === bookDate) {
             isOut = true;
           }
         }
