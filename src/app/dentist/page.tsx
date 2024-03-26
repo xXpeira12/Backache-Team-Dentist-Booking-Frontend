@@ -1,7 +1,7 @@
 import DentistCard from "@/components/DentistCard";
 import getDentists from "@/libs/getDentists";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/libs/auth"
 import getUserProfile from "@/libs/getUserProfile";
 import DentistCardForAdmin from "@/components/DentistCardfForAdmin";
 import Link from "next/link";
