@@ -105,7 +105,7 @@ export default function ChooseDentistPage() {
         },
         body: JSON.stringify({
           "dentist": dentistId,
-          "bookDate": dayjs(bookDate).format("YYYY-MM-DDTHH:mm:ss")
+          "bookDate": bookDate 
         })
       });
 
