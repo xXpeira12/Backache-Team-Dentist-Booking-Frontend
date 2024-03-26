@@ -13,9 +13,6 @@ import { useSearchParams } from "next/navigation"
 export default function ChooseDatePage() {
 
 const [bookDate, setBookDate] = useState<Dayjs|null>(null);
-const urlParams = useSearchParams();
-const token = urlParams.get("token");
-const userId = urlParams.get("uid");
 
     return (
         <div className="w-full h-[40%] text-center items-center justify-center flex flex-col my-4 py-4 space-y-2">
@@ -29,7 +26,7 @@ const userId = urlParams.get("uid");
                     onChange={(value) => {setBookDate(value)}}
                 />
             </LocalizationProvider>
-            <Link href={`/booking/choosedentist/?token=${token}&userId=${userId}&bookDate=${bookDate}`} >
+            <Link href={`/booking/choosedentist/?bookDate=${bookDate}`} >
             <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500">next</button>
             </Link>
         </div>

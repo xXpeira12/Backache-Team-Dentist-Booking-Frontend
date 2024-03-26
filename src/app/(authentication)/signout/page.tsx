@@ -7,12 +7,8 @@ export default function SignOutPage() {
     const handleSignOut = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await signOut();
-            if (response?.error) {
-                console.error("Sign out failed:", response.error);
-            } else {
-                window.location.href = '/';
-            }
+            await signOut();
+            window.location.href = '/';
         } catch (error) {
             console.error("Error occurred during sign out:", error);
         }

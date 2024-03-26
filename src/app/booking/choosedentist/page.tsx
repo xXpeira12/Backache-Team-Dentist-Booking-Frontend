@@ -5,6 +5,7 @@ import dayjs ,{ Dayjs } from "dayjs";
 import Link from "next/link";
 import getUserProfile from "@/libs/getUserProfile";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 interface Dentist {
   _id: string,
@@ -20,10 +21,13 @@ export default function ChooseDentistPage() {
   // const session = getServerSession(authOptions);
   const [dentists, setDentists] = useState<Dentist[]>([]);
   const [remaindentist, setRemaindentist] = useState<Set<Dentist>>(new Set());
+  const { data: session } = useSession();
+  const userId = session?.user._id;
+  const token = session?.user.token;
   const searchParams = useSearchParams();
   const bookDate = searchParams.get("bookDate");
-  const userId = searchParams.get("userId");
-  const token = searchParams.get("token");
+  // const userId = searchParams.get("userId");
+  // const token = searchParams.get("token");
   const [profile, setProfile] = useState();
   const router = useRouter();
   
@@ -78,8 +82,7 @@ export default function ChooseDentistPage() {
   // console.log(token)
   // console.log(userId)
   
-  const handleBooking = async (event: React.FormEvent<HTMLFormElement>, dentistId: string) => {
-    event.preventDefault();
+  const handleBooking = async (dentistId: string) => {
     
     try {
       const response = await fetch(`http://localhost:5000/api/v1/dentists/${dentistId}/bookings`, {
@@ -119,8 +122,8 @@ export default function ChooseDentistPage() {
               <h1>Clinic: {dentist.clinic}</h1>
               <h1>CreatedAt: {dentist.createdAt} </h1>
                 <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500" 
-                  onClick={(event) => {
-                    handleBooking(event, dentist._id);
+                  onClick={() => {
+                    handleBooking(dentist._id);
                     router.push(`/dashboard/${userId}`);
                   }}>
                   Select

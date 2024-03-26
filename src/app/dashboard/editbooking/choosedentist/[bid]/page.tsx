@@ -6,6 +6,7 @@ import Link from "next/link";
 import getUserProfile from "@/libs/getUserProfile";
 import { useRouter } from "next/navigation";
 import getBooking from "@/libs/getBooking";
+import { useSession } from "next-auth/react";
 
 interface Dentist {
   _id: string,
@@ -18,13 +19,14 @@ interface Dentist {
 
 
 export default function ChooseDentistPage() {
-  // const session = getServerSession(authOptions);
+  const { data: session } = useSession();
+  const token = session?.user.token;
   const [dentists, setDentists] = useState<Dentist[]>([]);
   const [remaindentist, setRemaindentist] = useState<Set<Dentist>>(new Set());
   const [booking, setBooking] = useState<any>(null);
   const searchParams = useSearchParams();
   const bookDate = searchParams.get("bookDate");
-  const token = searchParams.get("token");
+  // const token = searchParams.get("token");
   const bookingId = searchParams.get("bid");
   const router = useRouter();
 
@@ -84,8 +86,7 @@ export default function ChooseDentistPage() {
   
   
   
-  const handleBooking = async (event: React.FormEvent<HTMLFormElement>, dentistId: string) => {
-    event.preventDefault();
+  const handleBooking = async (dentistId: string) => {
     
     try {
       const response = await fetch(`http://localhost:5000/api/v1/bookings/${bookingId}`, {
@@ -128,8 +129,8 @@ export default function ChooseDentistPage() {
               <h1>Clinic: {dentist.clinic}</h1>
               <h1>CreatedAt: {dentist.createdAt} </h1>
                 <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500" 
-                  onClick={(event) => {
-                    handleBooking(event, dentist._id);
+                  onClick={() => {
+                    handleBooking(dentist._id);
                     router.push(`/dashboard/${booking.user}`);
                   }}>
                   Select

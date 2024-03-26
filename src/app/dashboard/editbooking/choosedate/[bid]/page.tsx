@@ -6,6 +6,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import dayjs,{ Dayjs } from "dayjs";
 import { useState } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function editBookingPage({
   params,
@@ -15,8 +16,7 @@ export default function editBookingPage({
   const urlParams = useSearchParams();
   const bookDate = urlParams.get("bookDate");
   const [newBookDate, setNewBookDate] = useState<Dayjs|null>(null);
-const token = urlParams.get("token");
-const bookingId = params.bid;
+  const bookingId = params.bid;
 
   return (
     <div>
@@ -38,7 +38,7 @@ const bookingId = params.bid;
           />
         </LocalizationProvider>
         <Link
-          href={`/dashboard/editbooking/choosedentist/${bookingId}?token=${token}&bid=${bookingId}&bookDate=${newBookDate}`}
+          href={`/dashboard/editbooking/choosedentist/${bookingId}?bid=${bookingId}&bookDate=${newBookDate}`}
         >
           <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500">
             next
