@@ -130,6 +130,7 @@ export default function ChooseDentistPage() {
 //   console.log(dayjs(bookDate).format("YYYY-MM-DDTHH:mm:ss"))
 //   console.log(token)
 //   console.log(booking)
+console.log(bookDate);
   return (
     <>
       <h1 className="text-center m-2 text-xl font-semibold">Choose Dentist</h1>

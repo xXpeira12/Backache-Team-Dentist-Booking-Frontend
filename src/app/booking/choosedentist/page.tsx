@@ -96,6 +96,7 @@ export default function ChooseDentistPage() {
   // console.log(dayjs(bookDate).format("YYYY-MM-DDTHH:mm:ss"))
   // console.log(token)
   // console.log(userId)
+  console.log(bookDate);
   
   const handleBooking = async (dentistId: string) => {
     
