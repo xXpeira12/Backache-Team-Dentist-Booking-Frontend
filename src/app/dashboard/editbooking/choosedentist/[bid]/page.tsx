@@ -49,7 +49,7 @@ export default function ChooseDentistPage() {
   useEffect(() => {
     const fetchDentists = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/v1/dentists");
+        const response = await fetch(`${process.env.BACKEND_URL}/api/v1/dentists`);
         const data = await response.json();
         setDentists(data.data);
       } catch (error) {

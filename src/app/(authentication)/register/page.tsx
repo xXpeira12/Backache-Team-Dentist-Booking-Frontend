@@ -22,7 +22,7 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost:5000/api/v1/auth/register",
+        `${process.env.BACKEND_URL}/api/v1/auth/register`,
         {
           method: "POST",
           headers: {
