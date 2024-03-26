@@ -74,7 +74,7 @@ export default function ChooseDentistPage() {
       } else {
         
         dentist.bookings.filter((booking: any) => {
-          if (booking.bookDate === bookDate) {
+          if (dayjs(booking.bookDate).format("YYYY-MM-DDTHH:00:00") === bookDate) {
             isOut = true;
           }
         }
@@ -84,7 +84,6 @@ export default function ChooseDentistPage() {
         } else {
           filteredDentists.add(dentist);
         }
-        isOut = false;
       }
     });
     
@@ -136,7 +135,6 @@ export default function ChooseDentistPage() {
               <h3 className="text-lg">Dr. {dentist.name}</h3>
               <h1>Experience: {dentist.year_exp} Years</h1>
               <h1>Clinic: {dentist.clinic}</h1>
-              <h1>CreatedAt: {dentist.createdAt} </h1>
                 <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500" 
                   onClick={() => {
                     handleBooking(dentist._id);
