@@ -6,6 +6,7 @@ import Link from "next/link";
 import getUserProfile from "@/libs/getUserProfile";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { revalidateTag } from "next/cache";
 
 interface Dentist {
   _id: string,
@@ -119,9 +120,12 @@ export default function ChooseDentistPage() {
       } else {
         // Handle error response from the server
         console.error("Failed to create booking:", response.statusText);
+        alert("Failed create booking, Please try again");
+        revalidateTag('bookings');
       }
     } catch (error) {
       console.error("Error creating booking:", error);
+      alert("Failed create booking, Please try again");
     }
   };
   

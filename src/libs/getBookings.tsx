@@ -8,7 +8,8 @@ export default async function getBookings(token:string) {
         method: "GET",
         headers: {
             authorization: `Bearer ${token}`
-        }
+        },
+        next: {tags:['bookings']}
     });
     if(!response.ok) {
         throw new Error("Failed to fetch bookings");
