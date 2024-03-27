@@ -112,7 +112,8 @@ export default function ChooseDentistPage() {
         },
         body: JSON.stringify({
           "dentist": dentistId,
-          "bookDate": bookDate 
+          "bookDate": bookDate,
+          "user": booking.user
         })
       });
 
