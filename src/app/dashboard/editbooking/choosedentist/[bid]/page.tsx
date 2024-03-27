@@ -150,7 +150,7 @@ console.log(bookDate);
                 <button className="bg-blue-300 m-2 p-2 rounded-lg hover:bg-indigo-500" 
                   onClick={() => {
                     handleBooking(dentist._id);
-                    router.push(`/dashboard/${booking.user}`);
+                    router.push(`/dashboard/${session?.user._id}`);
                   }}>
                   Select
                 </button>
