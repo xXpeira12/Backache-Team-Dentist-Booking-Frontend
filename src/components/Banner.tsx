@@ -29,8 +29,7 @@ export default function Banner() {
           alt="cover"
           fill={true}
           priority
-          objectFit="cover"
-          className="w-full h-full rounded-lg"
+          className="w-full h-full rounded-lg object-cover"
         />
       </div>
     </div>
